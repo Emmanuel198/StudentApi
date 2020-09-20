@@ -10,16 +10,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -134,7 +132,6 @@ class StudentServiceTest {
     }
 
 
-
     @Test
     void testDeleteStudentById() {
         Long id = 1L;
@@ -154,8 +151,9 @@ class StudentServiceTest {
         when(studentMapper.map(any(StudentEntity.class))).thenReturn(student);
         when(repository.findById(id)).thenReturn(java.util.Optional.of(studentEntity));
 
-        studentService.deleteStudentById(Long.valueOf(1));
+        studentService.deleteStudentById(1L);
     }
+
     @Test
     void testDeleteStudentByIdException() {
         Long id = 1L;

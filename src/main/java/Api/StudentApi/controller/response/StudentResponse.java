@@ -1,10 +1,22 @@
 package Api.StudentApi.controller.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class StudentResponse {
 
     private Long id;
     private String name;
     private String surname;
+    @JsonProperty("contact")
+    private ContactResponse contact;
+
+    public ContactResponse getContact() {
+        return contact;
+    }
+
+    public void setContact(ContactResponse contact) {
+        this.contact = contact;
+    }
 
     public Long getId() {
         return id;
