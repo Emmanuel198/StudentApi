@@ -1,12 +1,10 @@
 package Api.StudentApi.entities;
 
-import Api.StudentApi.controller.response.StudentResponse;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "student")
-public class StudentEntity extends StudentResponse {
+public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +13,17 @@ public class StudentEntity extends StudentResponse {
     private String name;
     @Column
     private String surname;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private ContactEntity contact;
+
+    public ContactEntity getContact() {
+        return contact;
+    }
+
+    public void setContact(ContactEntity contact) {
+        this.contact = contact;
+    }
 
     public Long getId() {
         return id;

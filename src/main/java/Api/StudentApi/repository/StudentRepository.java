@@ -1,6 +1,5 @@
 package Api.StudentApi.repository;
 
-
 import Api.StudentApi.entities.StudentEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

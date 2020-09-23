@@ -1,6 +1,5 @@
 package Api.StudentApi.controller;
 
-
 import Api.StudentApi.controller.request.StudentRequest;
 import Api.StudentApi.controller.response.StudentResponse;
 import Api.StudentApi.exeptions.StudentNotFound;
@@ -28,11 +27,11 @@ public class StudentController {
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponse> getStudentById(@PathVariable("id") Long id) throws StudentNotFound {
         Student student = studentService.getStudentById(id);
-        return ResponseEntity.ok(studentMapper.map(student));
+        return ResponseEntity.ok(studentMapper.mapToStudentResponse(student));
     }
 
     @PostMapping
-    public ResponseEntity<StudentResponse> createStudent(@RequestBody StudentRequest studentRequest) throws Exception {
+    public ResponseEntity<StudentResponse> createStudent(@RequestBody StudentRequest studentRequest) {
         Long studentId = studentService.createStudent(studentMapper.map(studentRequest));
         return ResponseEntity.created(URI.create(request.getRequestURL().toString() + "/" + studentId)).build();
     }
