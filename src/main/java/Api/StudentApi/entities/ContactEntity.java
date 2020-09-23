@@ -10,6 +10,17 @@ public class ContactEntity {
     private Long id;
     @Column
     private String email;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "telephone_id", referencedColumnName = "id")
+    private TelephoneEntity telephone;
+
+    public TelephoneEntity getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(TelephoneEntity telephone) {
+        this.telephone = telephone;
+    }
 
     public Long getId() {
         return id;
