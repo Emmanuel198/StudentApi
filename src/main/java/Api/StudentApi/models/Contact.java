@@ -1,17 +1,19 @@
 package Api.StudentApi.models;
 
+import java.util.List;
+
 public class Contact {
 
     private Long id;
     private String email;
-    private Telephone telephone;
+    private List<Telephone> telephones;
 
-    public Telephone getTelephone() {
-        return telephone;
+    public List<Telephone> getTelephones() {
+        return telephones;
     }
 
-    public void setTelephone(Telephone telephone) {
-        this.telephone = telephone;
+    public void setTelephones(List<Telephone> telephones) {
+        this.telephones = telephones;
     }
 
     public Long getId() {
