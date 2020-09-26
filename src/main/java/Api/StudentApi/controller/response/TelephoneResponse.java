@@ -1,10 +1,21 @@
 package Api.StudentApi.controller.response;
 
+import Api.StudentApi.models.TelephoneType;
+
 public class TelephoneResponse {
 
     private Integer id;
+    private TelephoneType type;
     private String prefix;
     private String number;
+
+    public TelephoneType getType() {
+        return type;
+    }
+
+    public void setType(TelephoneType type) {
+        this.type = type;
+    }
 
     public Integer getId() {
         return id;
