@@ -1,19 +1,20 @@
 package Api.StudentApi.controller.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 public class ContactResponse {
     private Long id;
     private String email;
-    @JsonProperty("telephone")
-    private TelephoneResponse telephone;
+    @JsonProperty("telephones")
+    private List<TelephoneResponse> telephones;
 
-    public TelephoneResponse getTelephone() {
-        return telephone;
+    public List<TelephoneResponse> getTelephones() {
+        return telephones;
     }
 
-    public void setTelephone(TelephoneResponse telephone) {
-        this.telephone = telephone;
+    public void setTelephones(List<TelephoneResponse> telephones) {
+        this.telephones = telephones;
     }
 
     public Long getId() {

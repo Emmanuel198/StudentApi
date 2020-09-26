@@ -1,25 +1,29 @@
 package Api.StudentApi.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "contact")
 public class ContactEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String email;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "telephone_id", referencedColumnName = "id")
-    private TelephoneEntity telephone;
+    @OneToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    @JoinColumn(name = "contact_id")
+    private List<TelephoneEntity> telephones;
 
-    public TelephoneEntity getTelephone() {
-        return telephone;
+    public List<TelephoneEntity> getTelephones() {
+        return telephones;
     }
 
-    public void setTelephone(TelephoneEntity telephone) {
-        this.telephone = telephone;
+    public void setTelephones(List<TelephoneEntity> telephones) {
+        this.telephones = telephones;
     }
 
     public Long getId() {
