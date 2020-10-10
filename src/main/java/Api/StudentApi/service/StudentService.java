@@ -7,7 +7,6 @@ import Api.StudentApi.models.Student;
 import Api.StudentApi.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -43,5 +42,6 @@ public class StudentService {
         }
         repository.deleteById(id);
     }
+
 }
 

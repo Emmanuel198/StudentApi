@@ -1,11 +1,22 @@
 package Api.StudentApi.models;
 
+import java.util.List;
+
 public class Student {
 
     private Long id;
     private String name;
     private String surname;
     private Contact contact;
+    private List<Subject> subjects;
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
 
     public Contact getContact() {
         return contact;

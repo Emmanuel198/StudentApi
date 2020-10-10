@@ -1,6 +1,8 @@
 package Api.StudentApi.controller.response;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
 public class StudentResponse {
 
@@ -9,6 +11,17 @@ public class StudentResponse {
     private String surname;
     @JsonProperty("contact")
     private ContactResponse contact;
+    @JsonProperty("subjects")
+    @JsonManagedReference
+    private List<SubjectResponse> subjects;
+
+    public List<SubjectResponse> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<SubjectResponse> subjects) {
+        this.subjects = subjects;
+    }
 
     public ContactResponse getContact() {
         return contact;

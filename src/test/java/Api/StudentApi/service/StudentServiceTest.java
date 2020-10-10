@@ -39,7 +39,7 @@ class StudentServiceTest {
     }
 
     @Test
-    void testGetStudentById() {
+    void testGetStudentById() throws StudentNotFound {
         Long id = 1L;
         String name = "test-name";
         String surname = "test-surname";
@@ -133,7 +133,7 @@ class StudentServiceTest {
 
 
     @Test
-    void testDeleteStudentById() {
+    void testDeleteStudentById() throws StudentNotFound {
         Long id = 1L;
         String name = "test-name";
         String surname = "test-surname";
