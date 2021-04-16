@@ -1,12 +1,8 @@
 package Api.StudentApi.mappers;
 
-import Api.StudentApi.controller.request.StudentRequest;
 import Api.StudentApi.controller.request.SubjectRequest;
-import Api.StudentApi.controller.response.StudentResponse;
 import Api.StudentApi.controller.response.SubjectResponse;
-import Api.StudentApi.entities.StudentEntity;
 import Api.StudentApi.entities.SubjectEntity;
-import Api.StudentApi.models.Student;
 import Api.StudentApi.models.Subject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +13,14 @@ import java.util.List;
 
 @Service
 public class SubjectMapper {
-    @Autowired
+
+
     private ModelMapper modelMapper;
+
+    @Autowired
+    public SubjectMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     public Subject map(SubjectEntity subjectEntity) {
         return modelMapper.map(subjectEntity, Subject.class);

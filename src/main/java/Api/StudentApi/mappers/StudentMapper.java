@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 public class StudentMapper {
 
-    @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    public StudentMapper(ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+    }
 
     public Student map(StudentEntity studentEntity) {
         return modelMapper.map(studentEntity, Student.class);

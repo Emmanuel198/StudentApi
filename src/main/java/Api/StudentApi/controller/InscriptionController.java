@@ -1,9 +1,9 @@
 package Api.StudentApi.controller;
 
 import Api.StudentApi.controller.request.InscriptionRequest;
-import Api.StudentApi.exeptions.StudentAlreadyEnrolled;
-import Api.StudentApi.exeptions.StudentNotFound;
-import Api.StudentApi.exeptions.SubjectNotFound;
+import Api.StudentApi.exceptions.StudentAlreadyEnrolled;
+import Api.StudentApi.exceptions.StudentNotFound;
+import Api.StudentApi.exceptions.SubjectNotFound;
 import Api.StudentApi.service.InscriptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

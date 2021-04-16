@@ -9,7 +9,6 @@ public class Student {
     private String surname;
     private Contact contact;
     private List<Subject> subjects;
-
     public List<Subject> getSubjects() {
         return subjects;
     }

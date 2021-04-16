@@ -2,7 +2,7 @@ package Api.StudentApi.models;
 
 public class Telephone {
 
-    private Integer id;
+    private Long id;
     private TelephoneType type;
     private String prefix;
     private String number;
@@ -15,11 +15,11 @@ public class Telephone {
         this.type = type;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

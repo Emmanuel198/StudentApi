@@ -2,7 +2,7 @@ package Api.StudentApi.controller;
 
 import Api.StudentApi.controller.request.SubjectRequest;
 import Api.StudentApi.controller.response.SubjectResponse;
-import Api.StudentApi.exeptions.SubjectNotFound;
+import Api.StudentApi.exceptions.SubjectNotFound;
 import Api.StudentApi.mappers.SubjectMapper;
 import Api.StudentApi.models.Subject;
 import Api.StudentApi.service.SubjectService;

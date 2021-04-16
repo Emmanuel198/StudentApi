@@ -1,7 +1,7 @@
 package Api.StudentApi.service;
 
 import Api.StudentApi.entities.StudentEntity;
-import Api.StudentApi.exeptions.StudentNotFound;
+import Api.StudentApi.exceptions.StudentNotFound;
 import Api.StudentApi.mappers.StudentMapper;
 import Api.StudentApi.models.Student;
 import Api.StudentApi.repository.StudentRepository;
@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -26,16 +26,17 @@ import static org.mockito.Mockito.*;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class StudentServiceTest {
-    @Mock
-    StudentMapper studentMapper;
+
     @Mock
     StudentRepository repository;
-    @InjectMocks
+    StudentMapper studentMapper;
     StudentService studentService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
+        studentMapper = new StudentMapper(new ModelMapper());
+        studentService = new StudentService(studentMapper, repository);
     }
 
     @Test
@@ -54,7 +55,6 @@ class StudentServiceTest {
         studentEntity.setName(name);
         studentEntity.setSurname(surname);
 
-        when(studentMapper.map(any(StudentEntity.class))).thenReturn(student);
         when(repository.findById(id)).thenReturn(java.util.Optional.of(studentEntity));
 
         Student resultStudent = studentService.getStudentById(id);
@@ -89,7 +89,6 @@ class StudentServiceTest {
         StudentEntity studentEntity = new StudentEntity();
         studentEntity.setId(id);
 
-        when(studentMapper.map(any(Student.class))).thenReturn(studentEntity);
         when(repository.save(any())).thenReturn(studentEntity);
 
         Long resultId = studentService.createStudent(student);
@@ -120,7 +119,6 @@ class StudentServiceTest {
         List<Student> studentList = new ArrayList<>();
         studentList.add(student);
 
-        when(studentMapper.map(any(ArrayList.class))).thenReturn(studentList);
         when(repository.findAll()).thenReturn(studentEntityList);
 
         List<Student> result = studentService.findAllStudents();
@@ -148,7 +146,6 @@ class StudentServiceTest {
         studentEntity.setName(name);
         studentEntity.setSurname(surname);
 
-        when(studentMapper.map(any(StudentEntity.class))).thenReturn(student);
         when(repository.findById(id)).thenReturn(java.util.Optional.of(studentEntity));
 
         studentService.deleteStudentById(1L);
@@ -169,4 +166,15 @@ class StudentServiceTest {
         Assert.fail();
     }
 
+    @Test
+    void testUpdateStudent() {
+        Student student = new Student();
+        student.setId(1L);
+
+        when(repository.save(any())).thenReturn(null);
+
+        studentService.updateStudent(student);
+
+        verify(repository, times(1)).save(any());
+    }
 }

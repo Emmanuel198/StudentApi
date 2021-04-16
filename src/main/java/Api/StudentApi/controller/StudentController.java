@@ -2,7 +2,7 @@ package Api.StudentApi.controller;
 
 import Api.StudentApi.controller.request.StudentRequest;
 import Api.StudentApi.controller.response.StudentResponse;
-import Api.StudentApi.exeptions.StudentNotFound;
+import Api.StudentApi.exceptions.StudentNotFound;
 import Api.StudentApi.mappers.StudentMapper;
 import Api.StudentApi.models.Student;
 import Api.StudentApi.service.StudentService;
@@ -18,12 +18,15 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
-    private HttpServletRequest request;
-    @Autowired
+    private StudentService studentService;
     private StudentMapper studentMapper;
     @Autowired
-    private StudentService studentService;
+    public StudentController(StudentMapper studentMapper, StudentService studentService){
+        this.studentMapper = studentMapper;
+        this.studentService = studentService;
+    }
+    @Autowired
+    private HttpServletRequest request;
 
     @GetMapping("/{id}")
     public ResponseEntity<StudentResponse> getStudentById(@PathVariable("id") Long id) throws StudentNotFound {

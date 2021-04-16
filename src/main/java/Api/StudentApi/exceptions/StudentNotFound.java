@@ -1,4 +1,4 @@
-package Api.StudentApi.exeptions;
+package Api.StudentApi.exceptions;
 
 public class StudentNotFound extends Exception {
 

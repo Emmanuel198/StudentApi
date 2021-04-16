@@ -1,7 +1,7 @@
 package Api.StudentApi.service;
 
 import Api.StudentApi.entities.SubjectEntity;
-import Api.StudentApi.exeptions.SubjectNotFound;
+import Api.StudentApi.exceptions.SubjectNotFound;
 import Api.StudentApi.mappers.SubjectMapper;
 import Api.StudentApi.models.Subject;
 import Api.StudentApi.repository.SubjectRepository;
@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -27,16 +28,16 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 class SubjectServiceTest {
 
-    @Mock
     SubjectMapper subjectMapper;
     @Mock
     SubjectRepository repository;
-    @InjectMocks
     SubjectService subjectService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
+        subjectMapper = new SubjectMapper(new ModelMapper());
+        subjectService = new SubjectService(subjectMapper, repository);
     }
 
 
@@ -53,8 +54,6 @@ class SubjectServiceTest {
         subjectEntity.setId(id);
         subjectEntity.setSubject(subject);
 
-
-        when(subjectMapper.map(any(SubjectEntity.class))).thenReturn(subject1);
         when(repository.findById(id)).thenReturn(Optional.of(subjectEntity));
 
         Subject resultStudent = subjectService.getSubjectById(id);
@@ -88,7 +87,6 @@ class SubjectServiceTest {
         SubjectEntity subjectEntity = new SubjectEntity();
         subjectEntity.setId(id);
 
-        when(subjectMapper.map(any(Subject.class))).thenReturn(subjectEntity);
         when(repository.save(any())).thenReturn(subjectEntity);
 
         Long resultId = subjectService.createSubject(subject);
@@ -116,7 +114,6 @@ class SubjectServiceTest {
         List<Subject> subjectList = new ArrayList<>();
         subjectList.add(subject1);
 
-        when(subjectMapper.map(any(ArrayList.class))).thenReturn(subjectList);
         when(repository.findAll()).thenReturn(subjectEntityList);
 
         List<Subject> result = subjectService.findAllSubject();
@@ -141,7 +138,6 @@ class SubjectServiceTest {
         subjectEntity.setId(id);
         subjectEntity.setSubject(subject);
 
-        when(subjectMapper.map(any(SubjectEntity.class))).thenReturn(subject1);
         when(repository.findById(id)).thenReturn(Optional.of(subjectEntity));
 
         subjectService.deleteSubjectById(1L);

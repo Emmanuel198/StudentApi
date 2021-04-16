@@ -1,7 +1,7 @@
 package Api.StudentApi.service;
 
 import Api.StudentApi.entities.SubjectEntity;
-import Api.StudentApi.exeptions.SubjectNotFound;
+import Api.StudentApi.exceptions.SubjectNotFound;
 import Api.StudentApi.mappers.SubjectMapper;
 import Api.StudentApi.models.Subject;
 import Api.StudentApi.repository.SubjectRepository;
@@ -14,10 +14,14 @@ import java.util.Optional;
 @Service
 public class SubjectService {
 
-    @Autowired
     private SubjectMapper subjectMapper;
-    @Autowired
     private SubjectRepository repository;
+
+    @Autowired
+    public SubjectService(SubjectMapper subjectMapper, SubjectRepository subjectRepository){
+        this.subjectMapper = subjectMapper;
+        this.repository = subjectRepository;
+    }
 
     public Subject getSubjectById(Long id) throws SubjectNotFound {
         Optional<SubjectEntity> subject = repository.findById(id);
